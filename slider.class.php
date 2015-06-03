@@ -174,6 +174,10 @@ abstract class WPPress_ACF_Field extends acf_field
 		return $value;
 	}
 	function render_field($field) {
+		foreach($field as $field_id=>$field_value):
+			if(!is_array($field_value)) continue;
+			if(array_key_exists('allow_null', $field_value)) $field['allow_null'] = $field_value['allow_null'];
+		endforeach;
 		$field['multiple'] = isset($field['multiple']) ? $field['multiple'] : false;
 		$field['disable'] = isset($field['disable']) ? $field['disable'] : false;
 		$field['hide_disabled'] = isset($field['hide_disabled']) ? $field['hide_disabled'] : false;
